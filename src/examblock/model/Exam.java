@@ -37,7 +37,6 @@ public class Exam {
     private String subtitle;
     private Character paper;
 
-    private ArrayList<Venue> venues; // i added this
 
 
     private Boolean CheckConditions(int day, int month, int year, int hour, int minute) {
@@ -75,7 +74,7 @@ public class Exam {
             throw new IllegalArgumentException("Something is wrong with the argument, pls check the string printed right before this.");
         } else {
             this.subject = subject;
-            subject.addExam(this); // storing the exam in the subject's exam list
+
             this.examtype = examType;
             this.date = LocalDate.of(year, month, day);
             this.time = LocalTime.of(hour, minute);
@@ -89,7 +88,7 @@ public class Exam {
         } else {
             this.subject = subject;
             this.examtype = examType;
-            subject.addExam(this);
+
 
             this.date = LocalDate.of(year, month, day);
             this.time = LocalTime.of(hour, minute);
@@ -108,7 +107,7 @@ public class Exam {
         } else {
             this.subject = subject;
             this.examtype = examType;
-            subject.addExam(this);
+
 
             this.date = LocalDate.of(year, month, day);
             this.time = LocalTime.of(hour, minute);
@@ -126,7 +125,6 @@ public class Exam {
         } else {
             this.subject = subject;
             this.examtype = examType;
-            subject.addExam(this);
 
             this.date = LocalDate.of(year, month, day);
             this.time = LocalTime.of(hour, minute);

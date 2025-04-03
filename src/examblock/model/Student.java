@@ -89,13 +89,7 @@ public class Student {
     public void addSubject(Subject subject) {
         // adds a subject to the student
         this.subjects.addSubject(subject);
-        if (!subject.getExams().isEmpty()) {
-            // so we have at least one exam wit this subject
-            for (int i=0; i<subject.getExams().size(); i++) {
-                this.exams.add(subject.getExams().get(i));
-                // we had each exam of this subject in the exam list of that student
-            }
-        }
+
     }
 
     public void changeLui(Long lui) {
@@ -184,17 +178,7 @@ public class Student {
             this.subjects.all().remove(subject);
             // all gives a reference so removing the subject from the reference removes it
             // from the actual subject list : subjects
-
-            // now we need to delete the exam associated with this subject from the examlist of our student
-
-            if (!subject.getExams().isEmpty()) {
-                // there is a least on exam planned for this subject
-                for (int i=0; i<subject.getExams().size(); i++) {
-                    this.exams.removeExam(subject.getExams().get(i));
-                    // removing the different exams of this subject from our student examList
-                }
-            }
-        }
+                    }
     }
 
     public SubjectList getSubjects() {

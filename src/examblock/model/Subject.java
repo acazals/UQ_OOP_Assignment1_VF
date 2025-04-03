@@ -43,11 +43,6 @@ public class Subject {
         this.exams = new ExamList();
     }
 
-    // store the exams if there are some for ths subject
-    public void addExam( Exam exam) {
-        this.exams.add(exam);
-    }
-
     public String getDescription() {
         return  this.description;
     }
@@ -60,9 +55,7 @@ public class Subject {
         return this.title;
     }
 
-    public ExamList getExams() {
-        return this.exams;
-    }
+
 
 
     

@@ -78,7 +78,7 @@ public class Session {
 
 
     public void allocateStudents(ExamList exams, StudentList cohort) {
-        if (exams.isEmpty() || cohort.isEmpty()) {
+        if (exams.all().isEmpty()) {
             return; // No exams or no  students = nothing to allocate
         }
 
@@ -95,29 +95,39 @@ public class Session {
         ArrayList<StudentList> studentsByExam = new ArrayList<>();
         StudentList allStudents = new StudentList();
 
-        for (Exam exam : exams.getExams()) {
-            Subject subject = exam.getSubject();
-            //  list of students taking this subject
-            StudentList studentsTakingExam = cohort.bySubject(subject, this.getVenue().getAARA());
-            StudentList studentsTakingExamSorted = studentsTakingExam.sortStudents();
-            studentsByExam.add(studentsTakingExamSorted);
-            totalStudents+= studentsTakingExamSorted.size();
+        for (Exam exam : exams.all()) {
+            // get all the students taking that one exam
+            StudentList byExam = new StudentList();
+            for (Student student : cohort.all()) {
+                if (student.getSubjects().all().contains(exam.getSubject()) && student.isAara() == this.getVenue().getAARA()) {
+                    // than that student is taking that exam
+                    if (!allStudents.all().contains(student)) { // that one student might be taking two exams at the same time...
+                        byExam.add(student);
+                        allStudents.add(student);
+                        totalStudents++;
+
+                    }
+
+                }
+            }
+            studentsByExam.add(byExam);
         } ;
         this.studentCount = totalStudents;
+
 
         // now compute gaps between exams
         int freeDesks = this.FreeDesks(studentsByExam); // number of free desks
         int NbDesksBetweenExams = freeDesks;
-        if (this.exams.size() >1) {
+        if (this.exams.all().size() >1) {
             // more than one exam => we divide by nb exam -1
-            NbDesksBetweenExams = freeDesks / (this.exams.size()-1); // freeDesks divided by the number of different exams -1 eg : 3 exams , 6 free columns => 3 free columns between 1 and 2 and between 2 and 3
+            NbDesksBetweenExams = freeDesks / (this.exams.all().size()-1); // freeDesks divided by the number of different exams -1 eg : 3 exams , 6 free columns => 3 free columns between 1 and 2 and between 2 and 3
         }
 
 
         for (StudentList byExam : studentsByExam) {
-            for (Student student : byExam.getStudents()) {
+            for (Student student : byExam.all()) {
                 // add all the sorted student for that exam
-                if (!allStudents.contains(student)) {
+                if ( !allStudents.all().contains(student)) {
                     allStudents.add(student);
                 }
             }

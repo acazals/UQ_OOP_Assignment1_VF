@@ -74,22 +74,13 @@ public class SessionList {
 
 
     public Session getSession( Venue venue, Exam exam) {
-        // get the sesh with matching venue and exam
-        boolean temp = false;
         for (Session session : this.list) {
-            // for each session
-            if (session.getExams().contains(exam) && session.getVenue().venueId().equals(venue.venueId())) {
-                // right session found
-                temp = true;
+            if (session.getVenue().equals(venue) && session.getExams().all().contains(exam)) {
+                // matching venue && matching exam
                 return session;
             }
         }
-        if (!temp) {
-            // not found
-            throw new java.lang.IllegalStateException(" session with given venue and exam not found in the ExamList");
-
-        }
-        return null;
+        throw new IllegalStateException();
     }
 
 

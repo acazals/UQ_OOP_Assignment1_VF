@@ -58,20 +58,8 @@ public class ExamList {
         }
     }
 
-    public boolean contains(Exam exam) {
-        if (this.examList.contains(exam)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public int size(){
-        return this.examList.size();
-    }
-
     public Exam get(int i) {
-        if (i > this.size()) {
+        if (i > this.examList.size()) {
             throw new IndexOutOfBoundsException(" index too big");
         } else {
             return this.examList.get(i);

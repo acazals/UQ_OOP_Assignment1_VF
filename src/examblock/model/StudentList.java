@@ -23,8 +23,10 @@ public class StudentList {
         return this.students.size();
     }
 
-    public ArrayList<Student> getStudents() {
-        return this.students;
+
+
+    public List<Student> all() {
+        return new ArrayList<>(this.students);
     }
 
     public Student get(int i) {
@@ -44,59 +46,39 @@ public class StudentList {
     }
 
     public Student byLui( Long lui) {
-        if (this.students.isEmpty()) {
-            return null;
-        } else {
-            for (int i=0; i<this.students.size(); i++) {
-                if (this.students.get(i).getLui() == lui) {
-                    return this.students.get(i);
-                }
+        for ( Student student : this.students) {
+            if (student.getLui() == lui)  {
+                return student;
             }
-            // if we arrive here it means we don thave that student in our list
-            return null;
         }
+        throw new IllegalStateException();
     }
 
-    public boolean isEmpty() {
-        return this.students.isEmpty();
-    }
 
     public int countStudents( Subject subject, boolean aara) {
         if (this.students.isEmpty()) {
-            return 0;
+            throw new IllegalArgumentException( " this is an empty list");
+
         } else {
-            int total=0;
-            for (int i=0; i<this.students.size(); i++) {
-                if (this.students.get(i).getSubjects().all().contains(subject)) {
+            int total =0;
+            for (Student student : this.students) {
 
-                    // so the student nb i is taking that subject lesson
-                    // the subject is in his subjectList
-                    // still need to check if he has the AARA adjustments
+                // loop through his exams and check if it matches
+                if (student.getSubjects().all().isEmpty()) {
+                    throw new IllegalArgumentException( " student not taking anye xams here");
+                }
+                for (Subject mysubject  : student.getSubjects().all()) {
 
-                    if (this.students.get(i).isAara() == aara) {
+                    if (mysubject.equals(subject) && student.isAara() == aara) {
+                        // then that student is indeed taking that subject and is that AARA type
                         total++;
                     }
                 }
-
             }
             return total;
         }
     }
 
-    public StudentList bySubject(Subject subject, boolean AARA) {
-        StudentList sorted = new StudentList();
-        for (int i=0; i<this.students.size(); i++) {
-            //if (this.students.get(i).getSubjects().contains(subject)) {
-            if (this.students.get(i).isTakingSubject(subject)){
-                // so this student is taking that course/subject
-                if (AARA == this.students.get(i).isAara() ) {
-                    sorted.add(this.students.get(i));
-                }
-
-            }
-        }
-        return sorted;
-    }
 
     public String getFullDetail() {
         if (this.students.isEmpty()) {
@@ -112,7 +94,7 @@ public class StudentList {
 
     public StudentList sortStudents() {
         // sorting students based on their frst name ( alphabetically)
-        if (this.isEmpty()) {
+        if (this.students.isEmpty()) {
             throw new IllegalStateException( " we can t sort an empty list");
         }
         StudentList sortedList = new StudentList(this.students);
