@@ -13,28 +13,29 @@ public class Desk {
         this.Number = deskNumber;
     }
 
-    public Desk(int deskNumber, String familyName, String givenName){
-        this.GivenName =givenName ;
-        this.FamilyName = familyName;
-        this.Number = deskNumber;
+//    public Desk(int deskNumber, String familyName, String givenName){
+//        this.GivenName =givenName ;
+//        this.FamilyName = familyName;
+//        this.Number = deskNumber;
+//    }
+
+    public void setFamilyName(String FamilyName) {
+        this.FamilyName = FamilyName;
     }
+
+    public void setGivenAndInit(String givenAndInit) {
+        this.GivenName = givenAndInit;
+    }
+
+
     public String deskFamilyName() {
         return this.FamilyName;
     }
 
     public String deskGivenAndInit(){
-        if (this.GivenName == null || this.GivenName.isBlank()) {
-            return "";
-        }
 
-        String[] parts = this.GivenName.trim().split("\\s+");
-        String first = parts[0];
 
-        if (parts.length > 1) {
-            return first + " " + parts[1].charAt(0) + ".";
-        }
-
-        return first;
+        return this.GivenName;
     }
 
     public int deskNumber() {

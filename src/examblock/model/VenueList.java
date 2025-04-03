@@ -53,7 +53,7 @@ public class VenueList {
             }
         }
         // same venue not found
-        throw new IllegalStateException("");
+        throw new IllegalStateException();
     }
 
     public String getFullDetail() {

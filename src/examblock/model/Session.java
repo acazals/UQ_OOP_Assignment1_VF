@@ -138,11 +138,24 @@ public class Session {
                     throw new IllegalStateException( " error ");
                 }
                 if (DeskCount > allStudents.size()) {
-                    this.allocatedDesks[i][j] = new Desk(DeskCount+1, Empty.getFamilyName(), Empty.givenNames() );
+                    this.allocatedDesks[i][j] = new Desk(DeskCount+1);
+                    this.allocatedDesks[i][j].setFamilyName(Empty.familyName());
+                    this.allocatedDesks[i][j].setGivenAndInit("");
                     DeskCount++;
                 }
                  else {
-                     this.allocatedDesks[i][j] = new Desk(DeskCount+1, allStudents.get(DeskCount).getFamilyName(), allStudents.get(DeskCount).givenNames());
+                     Student temp  = allStudents.get(DeskCount);
+                     this.allocatedDesks[i][j] = new Desk(DeskCount+1);
+                     String str = "";
+
+                        String[] parts = temp.givenNames().trim().split("\\s+");
+                        String first = parts[0];
+
+                        if (parts.length > 1) {
+                            str = str+ first + " " + parts[1].charAt(0) + ".";
+                        }
+                    this.allocatedDesks[i][j].setGivenAndInit(str);
+                    this.allocatedDesks[i][j].setFamilyName(temp.familyName());
                     DeskCount++;
 
                 }
@@ -162,7 +175,7 @@ public class Session {
     // iterate through all exams and identify which student is taking which exam
 
 
-    public int FreeDesks(ArrayList<StudentList> StudentByExam) {
+    private int FreeDesks(ArrayList<StudentList> StudentByExam) {
         int totalStudent = 0;
         for (StudentList byExam : StudentByExam) {
             totalStudent+= byExam.size();
@@ -225,13 +238,7 @@ public class Session {
 
     }
 
-    public int ComputeGap() {
-        // using total desks + number of students
-        return ((this.getVenue().deskCount() - this.countStudents()) / this.getVenue().getRows());
-        // get rows = nb of desk per column
-        // if we have more then a whole column free we can afford a free column for the gap
-        // so we compute how many free columns we can afford : we count number of free seats and count how many free columns that is
-    }
+
 
     public int countStudents() {
         return this.studentCount;

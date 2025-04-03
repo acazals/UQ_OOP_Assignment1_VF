@@ -116,7 +116,7 @@ public class StudentList {
             throw new IllegalStateException( " we can t sort an empty list");
         }
         StudentList sortedList = new StudentList(this.students);
-        sortedList.students.sort( (s1, s2) -> s1.familyName.compareTo(s2.familyName));
+        sortedList.students.sort( (s1, s2) -> s1.familyName().compareTo(s2.familyName()));
         return sortedList;
     }
 
@@ -124,7 +124,7 @@ public class StudentList {
     public String toString() {
           StringBuilder sb = new StringBuilder();
           for (Student student : this.students) {
-              String str = student.lui + " " + student.givenNames() + " " + student.getFamilyName() + "\n";
+              String str = student.getLui() + " " + student.givenNames() + " " + student.familyName() + "\n";
               sb.append(str);
               int i=1;
               for (Subject subject : student.getSubjects().all()) {

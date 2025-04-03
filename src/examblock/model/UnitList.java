@@ -1,6 +1,7 @@
 package examblock.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class UnitList {
 
@@ -14,28 +15,17 @@ public class UnitList {
         this.units.add(unit);
     }
 
-    public ArrayList<Unit> all() {
+    public List<Unit> all() {
         return new ArrayList<>(units);
     }
 
     public Unit getUnit(String title, Character unitId) {
-        if (this.units.isEmpty()) {
-            throw new IllegalStateException("");
-        } else {
-            boolean temp = false;
-            for (int i=0; i<this.units.size(); i++) {
-                if (units.get(i).getTitle().equals(title) && units.get(i).id() == unitId) {
-                    temp = true;
-                    return units.get(i);
-                }
+        for (Unit unit : this.units) {
+            if (unit.id().equals(unitId) && unit.getSubject().getTitle().equals(title)) {
+                return unit;
             }
-            if (!temp) {
-                // unit not found
-                throw new IllegalStateException("");
-
-            };  // no unit corresponding found
         }
-        return null;
+        throw new IllegalStateException();
     }
 
     public void removeUnit(Unit unit) {
@@ -61,7 +51,7 @@ public class UnitList {
         StringBuilder sb = new StringBuilder();
 
         for (Unit unit : this.units) {
-            String str = unit.getSubject() + " : Unit " + unit.id() + " " + unit.getTitle() + "\n";
+            String str = unit.getSubject() + " : Unit " + unit.id() + " " + unit.getSubject().getTitle() + "\n";
             sb.append(str);
         }
         return sb.toString();

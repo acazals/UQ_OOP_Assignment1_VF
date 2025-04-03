@@ -65,13 +65,7 @@ public class Subject {
     }
 
 
-    public boolean equals( Subject subject) {
-        if (this.title.equals( subject.title) && this.description.equals(subject.description) && this.exams.equals(subject.getExams())) {
-            return  true;
-        } else {
-            return false;
-        }
-    }
+    
 
     @Override
     public String toString() {

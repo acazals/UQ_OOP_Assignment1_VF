@@ -14,12 +14,12 @@ public class Student {
         Blue,Green,Red,White,Yellow;
     }
 
-    Long lui; // large integer
-    String givenNames;
-    String familyName;
-    LocalDate Dob;
-    String house;
-    Boolean aara;  //AARA adjustments
+    private Long lui; // large integer
+    private String givenNames;
+    private String familyName;
+    private LocalDate Dob;
+    private String house;
+    private Boolean aara;  //AARA adjustments
     private SubjectList subjects;
     private ExamList exams;
 
@@ -27,7 +27,7 @@ public class Student {
     private static final ArrayList<String> validHouses = new ArrayList<String>(Arrays.asList("Blue", "Green", "Red", "White", "Yellow"));
 
 
-    public boolean Check(long lui, int year, int month, int day, String house){
+    private boolean Check(long lui, int year, int month, int day, String house){
 
 
         try {
@@ -110,9 +110,6 @@ public class Student {
         return first;
     }
 
-    public String getFamilyName() {
-        return this.familyName;
-    }
 
     public String fullName() {
         String total = this.givenNames +" "+ this.familyName;
@@ -131,17 +128,43 @@ public class Student {
         }
             }
 
-//    public void setFamily( String familyName) {
-//        this.familyName = familyName;
-//    }
-//
-//    public void setGiven(String givenNames) {
-//        this.givenNames = givenNames;
-//    }
+    public void setFamily( String familyName) {
+        this.familyName = familyName;
+    }
+
+    public void setGiven(String givenNames) {
+        this.givenNames = givenNames;
+    }
+
+    public String getHouse() {
+        return this.house;
+    }
+
+    public String getFullDetail() {
+        StringBuilder sb = new StringBuilder();
+        for (Subject subject : this.subjects.all()) {
+            sb.append(subject.getTitle()).append("\n");
+        }
+
+        return "Student{" +
+                "lui=" + lui +
+                ", givenNames='" + givenNames + '\'' +
+                ", familyName='" + familyName + '\'' +
+                ", Dob=" + Dob +
+                ", house='" + house + '\'' +
+                ", aara=" + aara +
+                " taken subjects = " + sb.toString() + " \n \n \n \n"
+                + '}';
+
+    }
 
     public String shortName() {
         String first = this.givenNames.split(" ")[0];
         return first +" "+ this.familyName;
+    }
+
+    public String familyName() {
+        return this.familyName;
     }
 
     public LocalDate getDob() {

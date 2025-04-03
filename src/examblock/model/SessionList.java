@@ -1,5 +1,7 @@
 package examblock.model;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.DoubleSummaryStatistics;
 import java.util.List;
@@ -12,13 +14,32 @@ public class SessionList {
         this.list = new ArrayList<>();
     }
 
-    public ArrayList<Session> getSessions() {
-        return this.list;
-    }
+//    //public ArrayList<Session> getSessions() {
+//        return this.list;
+//    }
 
-    public ArrayList<Session> all() {
+    public List<Session> all() {
 
         return new ArrayList<>(this.list);
+    }
+
+    public void add(Session session) {
+        this.list.add(session);
+    }
+
+    public int getSessionNumber(Venue venue, LocalDate day, LocalTime start) {
+        for (Session session : this.list) {
+            if (session.getTime().equals(start) && session.getDay().equals(day) && session.getVenue().equals(venue)) {
+                return session.getSessionNumber();
+            }
+        }
+        return 0;
+    }
+
+    public void remove(Session session) {
+        if( this.list.contains(session)) {
+            this.list.remove(session);
+        }
     }
 
     public void scheduleExam( Venue venue, Exam exam, int numberStudents) {
@@ -42,6 +63,15 @@ public class SessionList {
         }
     }
 
+    public Session getSession( Venue venue, int sessionNumber) {
+        for (Session session : this.list) {
+            if (session.getVenue().equals(venue) && session.getSessionNumber()==sessionNumber) {
+                return session;
+            }
+        }
+        throw new IllegalStateException();
+    }
+
 
     public Session getSession( Venue venue, Exam exam) {
         // get the sesh with matching venue and exam
@@ -56,47 +86,13 @@ public class SessionList {
         }
         if (!temp) {
             // not found
-            throw new IllegalStateException(" session with given venue and exam not found in the ExamList");
+            throw new java.lang.IllegalStateException(" session with given venue and exam not found in the ExamList");
 
         }
         return null;
     }
 
-//    public int getSessionNewTotal ( Venue venue, Exam exam, int numberStudents) {
-//        try {
-//            if ((this.getSession(venue, exam) != null)) {
-//
-//                System.out.println( "There are already" + this.getSession(venue, exam).countStudents()+ "students who will be taking an exam in that venue; along with the " + numberStudents + "students for this exam.");
-//                // we already have a session where this exam takes palce
-//                try {
-//                    int total = this.getSession(venue, exam).countStudents() + numberStudents;
-//                    if (total <= venue.deskCount()) {
-//                        this.getSession(venue, exam).scheduleExam(exam, this.getSession(venue, exam).countStudents());
-//                        System.out.println("That's a total of" + total + " students.");
-//                        return total;
-//                    }
-//
-//                } catch(IllegalArgumentException ke) {
-//                    System.out.println(ke.toString());
-//                    return this.getSession(venue, exam).countStudents();
-//                }
-//
-//                // so we did find the session we wanted
-//
-//            }
-//
-//        } catch (IllegalStateException e ) {
-//            System.out.println("There is currently no exam session in that venue at that time.");
-//            System.out.println("Creating a session...");
-//            // we have to create this session
-//            Session newSesssion = new Session(venue, 1, exam.getDate(), exam.getTime());
-//            newSesssion.setStudentCount(numberStudents);
-//            // the session constructor will find a unique ID if 1 already used
-//            this.list.add(newSesssion);
-//            return numberStudents;
-//        }
-//        return 0;
-//    }
+
 
     public int getSessionNewTotal(Venue venue, Exam exam, int numberStudents) {
         // searches for a session in agviven venue at a given time

@@ -1,6 +1,7 @@
 package examblock.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SubjectList {
 
@@ -20,26 +21,18 @@ public class SubjectList {
         }
     }
 
-    public ArrayList<Subject> all() {
+    public List<Subject> all() {
         return new ArrayList<>(subjects); // reference in java
     }
 
     public Subject byTitle(String title) {
         // get the first Subject with a matching title
-        if (this.subjects.isEmpty()) {
-            throw new IllegalStateException("");
-        }
-        boolean temp = false;
-        for (int i=0; i<this.subjects.size(); i++) {
-            // compare the title of each subjects
-            if (this.subjects.get(i).getTitle().equals(title)) {
-                temp = true;
-                return this.subjects.get(i);
+        for (Subject subject : this.subjects) {
+            if (subject.getTitle().equals(title)) {
+                return subject;
             }
-        } if (!temp) {
-            throw new IllegalStateException("");
         }
-        return null;
+        throw new IllegalStateException();
     }
 
     public String getFullDetail() {

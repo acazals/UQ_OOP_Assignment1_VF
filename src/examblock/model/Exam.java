@@ -40,7 +40,7 @@ public class Exam {
     private ArrayList<Venue> venues; // i added this
 
 
-    public Boolean CheckConditions(int day, int month, int year, int hour, int minute) {
+    private Boolean CheckConditions(int day, int month, int year, int hour, int minute) {
         if (year < 2025) {
             System.out.println("Year must be 2025 or later.");
             return false;

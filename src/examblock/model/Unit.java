@@ -47,9 +47,7 @@ public class Unit {
         return this.subject;
     }
 
-    public String getTitle() {
-        return this.title;
-    }
+
 
     public Character id() {
         return this.unitId;

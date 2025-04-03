@@ -47,7 +47,7 @@ public class RoomList {
                 }
             }
             if (!temp) {
-                throw new IllegalStateException("");
+                throw new IllegalStateException();
 
             }
         }
