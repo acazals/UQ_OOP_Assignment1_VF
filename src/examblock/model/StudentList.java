@@ -19,9 +19,6 @@ public class StudentList {
         this.students.add(student);
     }
 
-    public int size() {
-        return this.students.size();
-    }
 
 
 
@@ -29,21 +26,6 @@ public class StudentList {
         return new ArrayList<>(this.students);
     }
 
-    public Student get(int i) {
-        if (i > this.students.size()) {
-            throw new IllegalArgumentException("");
-        } else {
-            return this.students.get(i);
-        }
-    }
-
-    public boolean contains( Student student) {
-        if (this.students.contains(student)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     public Student byLui( Long lui) {
         for ( Student student : this.students) {
@@ -51,7 +33,7 @@ public class StudentList {
                 return student;
             }
         }
-        throw new IllegalStateException();
+        throw new java.lang.IllegalStateException();
     }
 
 

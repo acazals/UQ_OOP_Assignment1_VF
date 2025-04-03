@@ -32,7 +32,7 @@ public class SubjectList {
                 return subject;
             }
         }
-        throw new IllegalStateException();
+        throw new java.lang.IllegalStateException();
     }
 
     public String getFullDetail() {
@@ -47,12 +47,6 @@ public class SubjectList {
         }
     }
 
-    public boolean contains( Subject subject) {
-        if (this.subjects.contains(subject)) {
-            return true;
-        } else {
-            return false;
-        } }
 
 
     @Override

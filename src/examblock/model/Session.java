@@ -114,7 +114,7 @@ public class Session {
             // get all the students taking that one exam
             StudentList byExam = new StudentList();
             for (Student student : cohort.all()) {
-                if (student.getSubjects().all().contains(exam.getSubject()) && student.isAara() == this.getVenue().getAARA()) {
+                if (student.getSubjects().all().contains(exam.getSubject()) && student.isAara() == this.getVenue().isAara()) {
                     // than that student is taking that exam
                     if (!allStudents.all().contains(student)) { // that one student might be taking two exams at the same time...
                         byExam.add(student);
@@ -160,14 +160,14 @@ public class Session {
                 if (DeskCount> this.getVenue().deskCount()) {
                     throw new IllegalStateException( " error ");
                 }
-                if (DeskCount > Disposition.size()) {
+                if (DeskCount > Disposition.all().size()) {
                     this.allocatedDesks[i][j] = new Desk(DeskCount+1);
                     this.allocatedDesks[i][j].setFamilyName(Empty.familyName());
                     this.allocatedDesks[i][j].setGivenAndInit("");
                     DeskCount++;
                 }
                  else {
-                     Student temp  = Disposition.get(DeskCount);
+                     Student temp  = Disposition.all().get(DeskCount);
                      this.allocatedDesks[i][j] = new Desk(DeskCount+1);
                      String str = "";
 
@@ -201,7 +201,7 @@ public class Session {
     private int FreeDesks(ArrayList<StudentList> StudentByExam) {
         int totalStudent = 0;
         for (StudentList byExam : StudentByExam) {
-            totalStudent+= byExam.size();
+            totalStudent+= byExam.all().size();
         }
         if (totalStudent > this.getVenue().deskCount()) {
             throw new IllegalStateException( " too many students in that venue");
@@ -214,11 +214,10 @@ public class Session {
 
     public void printDesks() {
 
-        for (Exam exam : this.exams.all()) {
-            System.out.println(exam);
-        }
         System.out.println(this.getVenue().roomId());
-        System.out.println(" Number of Students : " +this.studentCount);
+        System.out.println(this.getVenue().roomId() + ":" + this.getDate() + " " + this.getTime());
+
+        //System.out.println(" Number of Students : " +this.studentCount);
 //        System.out.println(this.students.getStudents().get(0));
 
         int rows = this.allocatedDesks.length;

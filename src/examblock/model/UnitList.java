@@ -25,7 +25,7 @@ public class UnitList {
                 return unit;
             }
         }
-        throw new IllegalStateException();
+        throw new java.lang.IllegalStateException();
     }
 
     public void removeUnit(Unit unit) {

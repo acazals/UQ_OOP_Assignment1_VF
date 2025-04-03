@@ -41,7 +41,7 @@ public class RoomList {
                 return room;
             }
         }
-        throw new IllegalStateException();
+        throw new java.lang.IllegalStateException();
     }
 
 

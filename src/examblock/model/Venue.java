@@ -35,9 +35,7 @@ public class Venue extends Room {
         return this.rows;
     }
 
-    public ArrayList<Session> getSessions() {
-        return this.sessions;
-    }
+
 
     public ArrayList<Integer> getSessionIDs() {
         return this.sessionIDs;
@@ -81,7 +79,7 @@ public class Venue extends Room {
         }
     }
 
-    public boolean getAARA() {
+    public boolean isAara() {
         return this.aara;
     }
 
@@ -107,14 +105,6 @@ public class Venue extends Room {
 
     @Override
     public String toString() {
-        return "Venue{" +
-                "id='" + id + '\'' +
-                ", roomCount=" + roomCount +
-                ", rooms=" + rooms +
-                ", rows=" + rows +
-                ", columns=" + columns +
-                ", totalDesks=" + totalDesks +
-                ", aara=" + aara +
-                '}';
+        return id;
     }
 }

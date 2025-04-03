@@ -28,7 +28,7 @@ public class ExamList {
             }
 
         }
-        throw new IllegalStateException();
+        throw new java.lang.IllegalStateException();
     }
 
 //    public void removeExam(Exam exam) {

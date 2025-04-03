@@ -67,7 +67,7 @@ public class SessionList {
                 return session;
             }
         }
-        throw new IllegalStateException();
+        throw new java.lang.IllegalStateException();
     }
 
 
@@ -78,7 +78,7 @@ public class SessionList {
                 return session;
             }
         }
-        throw new IllegalStateException();
+        throw new java.lang.IllegalStateException();
     }
 
 
