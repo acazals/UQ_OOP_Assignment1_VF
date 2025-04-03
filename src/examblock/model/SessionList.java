@@ -29,7 +29,7 @@ public class SessionList {
 
     public int getSessionNumber(Venue venue, LocalDate day, LocalTime start) {
         for (Session session : this.list) {
-            if (session.getTime().equals(start) && session.getDay().equals(day) && session.getVenue().equals(venue)) {
+            if (session.getTime().equals(start) && session.getDate().equals(day) && session.getVenue().equals(venue)) {
                 return session.getSessionNumber();
             }
         }
@@ -52,9 +52,7 @@ public class SessionList {
             // for each session using that venue
             if (session.getTime().equals(exam.getTime())) {
                 // schedule exam to an already existing session
-                if (session.getCohort()!= null) {
-                    throw new IllegalStateException( " that session has already been allocated ");
-                }
+
                 session.scheduleExam(exam, numberStudents);
                 System.out.println( exam.getSubject() + " exam added to " + venue.roomId());
                 break;
@@ -75,7 +73,7 @@ public class SessionList {
 
     public Session getSession( Venue venue, Exam exam) {
         for (Session session : this.list) {
-            if (session.getVenue().equals(venue) && session.getExams().all().contains(exam)) {
+            if (session.getVenue().equals(venue) && session.getExams().contains(exam)) {
                 // matching venue && matching exam
                 return session;
             }

@@ -36,22 +36,12 @@ public class RoomList {
     }
 
     public Room getRoom(String id) {
-        if (this.roomlist.isEmpty()) {
-            throw new IllegalStateException("");
-        } else {
-            boolean temp = false;
-            for (int i=0; i<this.roomlist.size(); i++) {
-                if (this.roomlist.get(i).roomId().equals(id)) {
-                    temp = true;
-                    return this.roomlist.get(i);
-                }
-            }
-            if (!temp) {
-                throw new IllegalStateException();
-
+        for (Room room : this.roomlist) {
+            if (room.roomId().equals(id)) {
+                return room;
             }
         }
-        return null;
+        throw new IllegalStateException();
     }
 
 

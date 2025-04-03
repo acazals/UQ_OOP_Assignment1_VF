@@ -21,7 +21,11 @@ public class VenueList {
             for (Venue venue : this.venues) {
                 // for each evnue we consider the sessions taking place in it
                 for (Session session : sessions.forVenue(venue)) {
-                    ExamList myExams = session.getExams();
+                    List<Exam> exams1 = session.getExams();
+                    ExamList myExams = new ExamList();
+                    for (Exam exam : exams1) {
+                        myExams.add(exam);
+                    }
                     session.allocateStudents(myExams, cohort);
                 }
             }

@@ -3,6 +3,7 @@ package examblock.model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Session {
 
@@ -51,8 +52,8 @@ public class Session {
         this.allocated = false;
     }
 
-    public ExamList getExams(){
-        return this.exams;
+    public List<Exam> getExams(){
+        return this.exams.all();
     }
 
     public Venue getVenue() {
@@ -72,7 +73,7 @@ public class Session {
     }
 
 
-    public LocalDate getDay() {
+    public LocalDate getDate() {
         return this.day;
     }
 
@@ -213,7 +214,7 @@ public class Session {
 
     public void printDesks() {
 
-        for (Exam exam : this.exams.getExams()) {
+        for (Exam exam : this.exams.all()) {
             System.out.println(exam);
         }
         System.out.println(this.getVenue().roomId());
@@ -274,11 +275,6 @@ public class Session {
         //this.allocateStudents(this.exams, this.cohort);
     }
 
-    public StudentList getCohort() {
-        return this.cohort;
-    }
-
-    //
 
     // parameters : exam and nmber of students
     // add an exam to an existing sessions ( our given instance of )

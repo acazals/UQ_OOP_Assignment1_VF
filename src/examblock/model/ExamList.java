@@ -13,10 +13,6 @@ public class ExamList {
         this.examList = new ArrayList<>();
     }
 
-    public List<Exam> getExams() {
-        return this.examList;
-    }
-
     public List<Exam> all() {
         return new ArrayList<>(examList);
     }
@@ -26,12 +22,13 @@ public class ExamList {
     }
 
     public Exam bySubjectTitle(String title) {
-        for (int i =0; i<this.examList.size(); i++) {
-            if ( this.examList.get(i).getSubject().getTitle()== title ) {
-                return this.examList.get(i);
+        for (Exam exam : this.examList) {
+            if (exam.getSubject().getTitle().equals(title)) {
+                return  exam;
             }
+
         }
-        return null; // no matching subject title...
+        throw new IllegalStateException();
     }
 
 //    public void removeExam(Exam exam) {
@@ -50,21 +47,7 @@ public class ExamList {
         }
     }
 
-    public boolean isEmpty() {
-        if (this.examList.isEmpty()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
-    public Exam get(int i) {
-        if (i > this.examList.size()) {
-            throw new IndexOutOfBoundsException(" index too big");
-        } else {
-            return this.examList.get(i);
-        }
-    }
 
     public String getFullDetail() {
         StringBuilder sb = new StringBuilder();
