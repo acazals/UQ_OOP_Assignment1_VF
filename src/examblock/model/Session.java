@@ -18,8 +18,8 @@ public class Session {
     private int studentCount;
     private boolean allocated;
 
-    public static Long myLui = -250L;
-    public static Student Empty = new Student( myLui, "", "Empty", 15, 2, 2003, "Blue" );
+    private static Long myLui = -250L;
+    private static Student Empty = new Student( myLui, "", "Empty", 15, 2, 2003, "Blue" );
     // creating an empty student that will be used in our StudentList with all students
 
     public Session (Venue venue, int sessionNumber, LocalDate day, LocalTime start) {
@@ -76,6 +76,20 @@ public class Session {
         return this.day;
     }
 
+    private StudentList sortStudents(StudentList students) {
+        // sorting students based on their frst name ( alphabetically)
+        if (students.all().isEmpty()) {
+            throw new IllegalStateException( " we can t sort an empty list");
+        }
+        ArrayList<Student>  mySortedList= new ArrayList<>(students.all());
+        mySortedList.sort( (s1, s2) -> s1.familyName().compareTo(s2.familyName()));
+        StudentList sorted = new StudentList();
+        for (Student student : mySortedList) {
+            sorted.add(student);
+        }
+        return sorted;
+    }
+
 
     public void allocateStudents(ExamList exams, StudentList cohort) {
         if (exams.all().isEmpty()) {
@@ -105,38 +119,36 @@ public class Session {
                         byExam.add(student);
                         allStudents.add(student);
                         totalStudents++;
-
                     }
-
                 }
             }
-            studentsByExam.add(byExam);
+            studentsByExam.add( this.sortStudents(byExam));
         } ;
         this.studentCount = totalStudents;
 
-
-        // now compute gaps between exams
         int freeDesks = this.FreeDesks(studentsByExam); // number of free desks
+
         int NbDesksBetweenExams = freeDesks;
         if (this.exams.all().size() >1) {
             // more than one exam => we divide by nb exam -1
             NbDesksBetweenExams = freeDesks / (this.exams.all().size()-1); // freeDesks divided by the number of different exams -1 eg : 3 exams , 6 free columns => 3 free columns between 1 and 2 and between 2 and 3
         }
 
+        // now we can save the different seats :
+        StudentList Disposition = new StudentList();
+        for (StudentList MyStudents : studentsByExam) {
 
-        for (StudentList byExam : studentsByExam) {
-            for (Student student : byExam.all()) {
-                // add all the sorted student for that exam
-                if ( !allStudents.all().contains(student)) {
-                    allStudents.add(student);
-                }
+            for (Student student : MyStudents.all()) {
+                Disposition.add(student);
             }
-            // once this is done add all the EMPTY students needed
+            // now that this exam is seated we add the empty desks
             for (int i=0; i<NbDesksBetweenExams; i++) {
-                allStudents.add(Empty);
+                Disposition.add(Empty);
             }
         }
-        this.students = allStudents;
+        // finally the matrix is filled
+
+        this.students = Disposition;
 
         // now i have my list ready
         int DeskCount = 0;
@@ -147,14 +159,14 @@ public class Session {
                 if (DeskCount> this.getVenue().deskCount()) {
                     throw new IllegalStateException( " error ");
                 }
-                if (DeskCount > allStudents.size()) {
+                if (DeskCount > Disposition.size()) {
                     this.allocatedDesks[i][j] = new Desk(DeskCount+1);
                     this.allocatedDesks[i][j].setFamilyName(Empty.familyName());
                     this.allocatedDesks[i][j].setGivenAndInit("");
                     DeskCount++;
                 }
                  else {
-                     Student temp  = allStudents.get(DeskCount);
+                     Student temp  = Disposition.get(DeskCount);
                      this.allocatedDesks[i][j] = new Desk(DeskCount+1);
                      String str = "";
 
@@ -193,6 +205,7 @@ public class Session {
         if (totalStudent > this.getVenue().deskCount()) {
             throw new IllegalStateException( " too many students in that venue");
         }
+
         return (this.getVenue().deskCount() - totalStudent); // returning the number of free desks
 
     }
