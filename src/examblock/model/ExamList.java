@@ -89,11 +89,10 @@ public class ExamList {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        int index = 1;
+
 
         for (Exam exam : examList) {
-            sb.append(index).append(". ").append(exam.getFormattedTitle()).append("\n");
-            index++;
+            sb.append(exam.getFullDetail());
         }
 
         return sb.toString();

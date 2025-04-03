@@ -79,7 +79,7 @@ public class Exam {
             this.examtype = examType;
             this.date = LocalDate.of(year, month, day);
             this.time = LocalTime.of(hour, minute);
-            this.venues = new ArrayList<>();
+
         }
     }
 
@@ -95,7 +95,7 @@ public class Exam {
             this.time = LocalTime.of(hour, minute);
 
             this.unit = unit;
-            this.venues = new ArrayList<>();
+
              }
         // paper number and subtitle but no unit specified
     }
@@ -115,7 +115,7 @@ public class Exam {
 
             this.paper = paper;
             this.subtitle = subtitle;
-            this.venues = new ArrayList<>();
+
         }
         // paper number and subtitle but no unit specified
     }
@@ -134,7 +134,7 @@ public class Exam {
             this.paper = paper;
             this.subtitle = subtitle;
             this.unit = unit;
-            this.venues = new ArrayList<>();
+
         }
         // paper number and subtitle but no unit specified
     }
@@ -175,69 +175,17 @@ public class Exam {
 
     }
 
-    public void addVenue( Venue venue) {
-        this.venues.add(venue);
-    }
-
-
-
-    public ArrayList<Venue> getVenues() {
-        return this.venues;
-    }
-
-
-//    @Override
-//    public boolean equals(Object obj) {
-//        // Check if same instance
-//        if (this == obj) {
-//            return true;
-//        }
-//
-//        // Check if  type Exam
-//        if (obj == null || getClass() != obj.getClass()) {
-//            return false;
-//        }
-//
-//        // Cast the object to Exam
-//        Exam otherExam = (Exam) obj;
-//
-//        // Compare all relevant fields (subject, examType, date, time, etc.)
-//        return this.examtype == otherExam.examtype &&
-//                this.subject.getFullDetail().equals(otherExam.subject.getFullDetail()) &&
-//                this.date.equals(otherExam.date) &&
-//                this.time.equals(otherExam.time) &&
-//                this.unit.equals(otherExam.unit) &&
-//                this.subtitle.equals(otherExam.subtitle) &&
-//                this.paper.equals(otherExam.paper);
-//    } normally not needed if i use the liste.remove object in the ExamList class
-
     // full details
     public String getFullDetail() {
-        if (this.paper!= null) {
-            return "Exam: " + this.getTitle() + "\n" +
-                    "Paper: " + paper + "\n" +
-                    "Subtitle: " + subtitle + "\n" +
-                    "Unit: " + unit + "\n" +
-                    "Date: " + date + "\n" +
-                    "Time: " + time;
-        }  else {
-            return "Exam: " + this.getTitle() + "\n" +
-                    "Subtitle: " + subtitle + "\n" +
-                    "Unit: " + unit + "\n" +
-                    "Date: " + date + "\n" +
-                    "Time: " + time;
-        }
-
-    }
-
-    public String getFormattedTitle() {
         String title = "Year 12 "+  this.examtype+  " Assessment " + this.subject;
 
         if (this.paper != null) {
             title += " " + "Paper " + this.paper;
         }
         return title;
+
     }
+
 
     // toString
     @Override

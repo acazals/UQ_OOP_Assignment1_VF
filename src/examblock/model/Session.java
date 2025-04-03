@@ -247,8 +247,7 @@ public class Session {
 
     public void scheduleExam( Exam exam, int nbStudents) {
         this.studentCount+= nbStudents;
-        exam.addVenue(this.getVenue());
-        this.exams.add(exam); // so that exam will take place in that venue
+                this.exams.add(exam); // so that exam will take place in that venue
         //this.allocateStudents(this.exams, this.cohort);
     }
 

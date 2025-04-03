@@ -17,26 +17,16 @@ public class VenueList {
 
     public void allocateStudents ( SessionList sessions, ExamList exams, StudentList cohort) {
 
-        for (Venue venue : this.venues) {
-            // for each venue : we have a given array of sessiosn
-            // the given list : sessions.forVenue(venue);
-            for (Session session : sessions.forVenue(venue)) {
-                // for each session taking place in that venue
-                ExamList corresponding = new ExamList();
-                for (Exam exam : exams.getExams()) {
-                    if (!exam.getVenues().isEmpty()){
-                        // our exam has been assigned to a venue (AARA or not)
-                        if (exam.getVenues().contains(venue)){
-                            corresponding.add(exam);
-                        }
-                    }
 
+            for (Venue venue : this.venues) {
+                // for each evnue we consider the sessions taking place in it
+                for (Session session : sessions.forVenue(venue)) {
+                    ExamList myExams = session.getExams();
+                    session.allocateStudents(myExams, cohort);
                 }
-                session.allocateStudents(corresponding, cohort); // examlist always the same
-
-
             }
-        }
+
+
     }
 
 
