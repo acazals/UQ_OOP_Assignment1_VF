@@ -187,14 +187,7 @@ public class Student {
     // having a set of subjetc sinstead of a list would make operations faster
     // eg : for studentlist count subjetcs, AARA
 
-    public Boolean isTakingSubject(Subject subject) {
-        for (Subject mysubject : this.subjects.all()) {
-            if (mysubject.equals(subject)) {
-                return true;
-            }
-        }
-        return false;
-    }
+
 
     @Override
     public String toString() {

@@ -67,7 +67,12 @@ public class Venue extends Room {
     }
 
     RoomList getRooms() {
-        return this.rooms;
+
+        RoomList copy = new RoomList();
+        for (Room room : this.rooms.all()) {
+            copy.addRoom(room);
+        }
+        return copy;
     }
 
 

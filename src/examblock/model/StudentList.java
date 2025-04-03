@@ -11,10 +11,6 @@ public class StudentList {
         this.students = new ArrayList<>();
     }
 
-    public StudentList(List<Student> students) {
-        this.students = new ArrayList<>(students);
-    }
-
     public void add(Student student) {
         this.students.add(student);
     }
