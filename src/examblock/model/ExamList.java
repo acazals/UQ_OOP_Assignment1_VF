@@ -36,7 +36,7 @@ public class ExamList {
      * */
     public Exam bySubjectTitle(String title) {
         for (Exam exam : this.examList) {
-            if (exam.getSubject().title().equals(title)) {
+            if (exam.getSubject().getTitle().equals(title)) {
                 return  exam;
             }
 

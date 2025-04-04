@@ -101,7 +101,7 @@ public class StudentList {
             sb.append(str);
             int i = 1;
             for (Subject subject : student.getSubjects().all()) {
-                String str2 = i + ". " + subject.title() + "\n";
+                String str2 = i + ". " + subject.getTitle() + "\n";
                 sb.append(str2);
                 i++;
             }

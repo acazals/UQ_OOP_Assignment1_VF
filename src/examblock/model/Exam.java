@@ -230,17 +230,17 @@ public class Exam {
         return time;
     }
 
-    //  title
+    //  getTitle
     /** Javadoc
      * @return r
      * */
     public String getTitle() {
         // returns type subject paper subtitle
         if (this.paper != null) {
-            return this.examtype + " - " + subject.title()
+            return this.examtype + " - " + subject.getTitle()
                     + " - " + paper.toString() + " - " + subtitle;
         } else {
-            return this.examtype + " - " + subject.title() + " - " + subtitle;
+            return this.examtype + " - " + subject.getTitle() + " - " + subtitle;
         }
 
     }
@@ -249,12 +249,12 @@ public class Exam {
      * @return r
      * */
     public String getShortTitle() {
-        // same as get title ??
+        // same as get getTitle ??
         if (this.paper != null) {
-            return this.examtype + " - " + subject.title()
+            return this.examtype + " - " + subject.getTitle()
                     + " - " + Character.toString(paper) + this.subtitle;
         } else {
-            return this.examtype + " - " + subject.title() + " - " + this.subtitle;
+            return this.examtype + " - " + subject.getTitle() + " - " + this.subtitle;
         }
 
     }
@@ -267,14 +267,14 @@ public class Exam {
      * */
     public String getFullDetail() {
         if (this.examtype == ExamType.INTERNAL) {
-            String title = "Year 12 Internal Assessment " + this.subject.title();
+            String title = "Year 12 Internal Assessment " + this.subject.getTitle();
 
             if (this.paper != null) {
                 title += " " + "Paper " + this.paper;
             }
             return title;
         } else {
-            String title = "Year 12 External Assessment " + this.subject.title();
+            String title = "Year 12 External Assessment " + this.subject.getTitle();
 
             if (this.paper != null) {
                 title += " " + "Paper " + this.paper;

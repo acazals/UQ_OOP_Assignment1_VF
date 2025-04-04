@@ -19,17 +19,17 @@ public class Unit {
 
     /**
     private void validateParameters
-     (Subject subject, Character unitId, String title, String description) {
+     (Subject subject, Character unitId, String getTitle, String description) {
         if (subject == null) {
             throw new IllegalArgumentException(" cannot be null.");
         }
         if (unitId == null || !Character.toString(unitId).matches("[0-9A-Z]")) {
             throw new IllegalArgumentException(" ID must be a single character (0-9 or A-Z).");
         }
-        if (title == null || title.trim().isEmpty()) {
+        if (getTitle == null || getTitle.trim().isEmpty()) {
             throw new IllegalArgumentException("Title cannot be null / empty.");
         }
-        if (!title.matches("([A-Z][a-z]*|[0-9]+|I{1,3}|IV|V?I{0,3})+
+        if (!getTitle.matches("([A-Z][a-z]*|[0-9]+|I{1,3}|IV|V?I{0,3})+
      ( [A-Z][a-z]*|[0-9]+|I{1,3}|IV|V?I{0,3})*")) {
             throw new IllegalArgumentException(" contains invalid characters ");
         }
@@ -40,7 +40,7 @@ public class Unit {
     } */
 
 
-    //Formats the title : ensure single spaces + no trailing full stop.
+    //Formats the getTitle : ensure single spaces + no trailing full stop.
 
     private String formatTitle(String title) {
         return title.trim().replaceAll("\\s+", " ").replaceAll("\\.$", "");
@@ -55,7 +55,7 @@ public class Unit {
      *
      * */
     public Unit(Subject subject, Character unitId, String title, String description) {
-        //validateParameters(subject, unitId, title, description);
+        //validateParameters(subject, unitId, getTitle, description);
         // if one parameter wrong, error thrown
         this.subject = subject;
         this.unitId = unitId;
@@ -97,7 +97,7 @@ public class Unit {
                 +
                 ", unitId=" + unitId
                 +
-                ", title='" + title + '\''
+                ", getTitle='" + title + '\''
                 +
                 ", description='" + description + '\''
                 +
@@ -106,12 +106,12 @@ public class Unit {
 
     @Override
     public String toString() {
-        // unit ID + title
+        // unit ID + getTitle
         return "Unit{"
                 +
                 ", unitId=" + unitId
                 +
-                ", title='" + title + '\''
+                ", getTitle='" + title + '\''
                 +
                 '}';
     }

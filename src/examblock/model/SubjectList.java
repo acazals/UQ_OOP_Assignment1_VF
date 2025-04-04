@@ -41,9 +41,9 @@ public class SubjectList {
      * @return r
      * */
     public Subject byTitle(String title) {
-        // get the first Subject with a matching title
+        // get the first Subject with a matching getTitle
         for (Subject subject : this.subjects) {
-            if (subject.title().equals(title)) {
+            if (subject.getTitle().equals(title)) {
                 return subject;
             }
         }
@@ -72,7 +72,7 @@ public class SubjectList {
         StringBuilder sb = new StringBuilder();
         int i = 1;
         for (Subject subject : subjects) {
-            String str = i + ". " + subject.title() + "\n";
+            String str = i + ". " + subject.getTitle() + "\n";
             sb.append(str);
             i++;
         }

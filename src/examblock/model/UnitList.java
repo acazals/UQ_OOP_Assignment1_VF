@@ -29,14 +29,14 @@ public class UnitList {
     }
 
     /**
-     *  * @param title the title
+     *  * @param getTitle the getTitle
      * @param unitId id
-     * @param title title
+     * @param title getTitle
      * @return the id*/
 
     public Unit getUnit(String title, Character unitId) {
         for (Unit unit : this.units) {
-            if (unit.id().equals(unitId) && unit.getSubject().title().equals(title)) {
+            if (unit.id().equals(unitId) && unit.getSubject().getTitle().equals(title)) {
                 return unit;
             }
         }
@@ -71,7 +71,7 @@ public class UnitList {
 
         for (Unit unit : this.units) {
             String str = unit.getSubject() + " : Unit " + unit.id()
-                    + " " + unit.getSubject().title() + "\n";
+                    + " " + unit.getSubject().getTitle() + "\n";
             sb.append(str);
         }
         return sb.toString();

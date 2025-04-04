@@ -92,7 +92,7 @@ public class ExamBlock {
     }
 
     private String getTitleFromUser() {
-        System.out.println("What is the title for this exam block? (INPUT HERE): ");
+        System.out.println("What is the getTitle for this exam block? (INPUT HERE): ");
         return cli.getStringInput();
     }
 
@@ -174,7 +174,7 @@ public class ExamBlock {
                 + aaraString(aara) + "students for? ");
         Subject subject = cli.pickOptionFromCollection(subjectCatalogue.all());
         System.out.println("There are " + cohort.countStudents(subject, aara) + aaraString(aara) +
-                "students who will be taking the " + subject.title() + " exam.");
+                "students who will be taking the " + subject.getTitle() + " exam.");
     }
 
     private void scheduleExam() {
@@ -187,7 +187,7 @@ public class ExamBlock {
         Exam exam = cli.pickOptionFromCollection(exams.all());
         int numberStudents = cohort.countStudents(exam.getSubject(), aara);
         System.out.println("There are " + numberStudents + aaraString(aara) +
-                "students who will be taking the " + exam.getSubject().title() + " exam.");
+                "students who will be taking the " + exam.getSubject().getTitle() + " exam.");
         // Next select a venue.
         Venue venue; // Local variable for the selected venue (will be set from a menu).
         int numberSeats; // the number of available student desks in the venue.
@@ -207,7 +207,7 @@ public class ExamBlock {
             totalStudents = sessions.getSessionNewTotal(venue, exam, numberStudents);
         } while (sessionOverflow(numberSeats, totalStudents));
         // Confirm scheduling
-        System.out.println("CONFIRM scheduling the " + exam.getSubject().title() +
+        System.out.println("CONFIRM scheduling the " + exam.getSubject().getTitle() +
                 aaraString(aara) + "exam into " + venue.venueId());
         String pickedOption;
         ArrayList<String> options = new ArrayList<>();

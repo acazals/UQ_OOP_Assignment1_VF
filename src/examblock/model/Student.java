@@ -207,7 +207,7 @@ public class Student {
     public String getFullDetail() {
         StringBuilder sb = new StringBuilder();
         for (Subject subject : this.subjects.all()) {
-            sb.append(subject.title()).append("\n");
+            sb.append(subject.getTitle()).append("\n");
         }
 
         return "Student{"
@@ -289,7 +289,7 @@ public class Student {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (Subject subject : this.subjects.all()) {
-            sb.append(subject.title()).append("\n");
+            sb.append(subject.getTitle()).append("\n");
         }
 
         return "Student{"

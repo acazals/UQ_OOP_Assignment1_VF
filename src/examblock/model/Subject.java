@@ -3,10 +3,10 @@ package examblock.model;
 /**
  * Javadoc
  *
- * @param title       Javadoc
+ * @param getTitle       Javadoc
  * @param description Javadoc
  */
-public record Subject(String title, String description) {
+public record Subject(String getTitle, String description) {
 
     /**
      * Javadoc
@@ -16,14 +16,14 @@ public record Subject(String title, String description) {
 
         title = title.trim().replaceAll("\\s+", " ");
 
-        // if title ends with a full stop
+        // if getTitle ends with a full stop
         if (title.endsWith(".")) {
             throw new IllegalArgumentException("Title must not end with a full stop.");
         }
 
 
         if (!title.matches("([A-Z][a-z]*|[0-9]+|[IVXLCDM]+)( [A-Z][a-z]*|[0-9]+|[IVXLCDM]+)*")) {
-            throw new IllegalArgumentException("Invalid title format.");
+            throw new IllegalArgumentException("Invalid getTitle format.");
         }
 
         return title;
@@ -32,9 +32,7 @@ public record Subject(String title, String description) {
     private String validateDescription(String description) {
         if (!description.matches("[A-Z].*\\.")) {
             // .* means followed by any characters
-            throw new IllegalArgumentException("must start with a capital letter "
-                    +
-                    "+ end with a full stop.");
+            throw new IllegalArgumentException("must start with a capital letter + end with a full stop.");
         }
 
         return description;
@@ -58,30 +56,19 @@ public record Subject(String title, String description) {
      * Javadoc
      */
     public String getFullDetail() {
-        return this.title.toUpperCase() + "\n" + "\"" + this.description + "\"";
+        return this.getTitle.toUpperCase() + "\n" + "\"" + this.description + "\"";
     }
 
     /**
      * Javadoc
      */
-    @Override
-    public String title() {
-        return this.title;
-    }
-
-    /**
-     * Javadoc
-     */
-    private static String  capitalizeFirstLetter(String word) {
-        if (word == null || word.isEmpty()) {
-            return word;
-        }
-        return word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
+    public String getTitle() {
+        return this.getTitle;
     }
 
 
     @Override
     public String toString() {
-        return this.title.toUpperCase(); // title as a String in all uppercase and a newline.
+        return this.getTitle.toUpperCase(); // subject getTitle as a String in all uppercase and a newline.
     }
 }
