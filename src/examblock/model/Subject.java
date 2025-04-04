@@ -32,7 +32,8 @@ public record Subject(String getTitle, String description) {
     private String validateDescription(String description) {
         if (!description.matches("[A-Z].*\\.")) {
             // .* means followed by any characters
-            throw new IllegalArgumentException("must start with a capital letter + end with a full stop.");
+            throw new
+                    IllegalArgumentException("must start with a capital + end with a full stop.");
         }
 
         return description;
@@ -69,6 +70,7 @@ public record Subject(String getTitle, String description) {
 
     @Override
     public String toString() {
-        return this.getTitle.toUpperCase(); // subject getTitle as a String in all uppercase and a newline.
+        return this.getTitle.toUpperCase();
+        // subject getTitle as a String in all uppercase and a newline.
     }
 }

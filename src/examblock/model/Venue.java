@@ -105,7 +105,12 @@ public class Venue extends Room {
         }
     }
 
-    RoomList getRooms() {
+
+    /** Javadoc
+     *  a
+     * @return r
+     * */
+    public RoomList getRooms() {
 
         RoomList copy = new RoomList();
         for (Room room : this.rooms.all()) {
