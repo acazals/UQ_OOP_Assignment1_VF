@@ -1,29 +1,42 @@
 package examblock.model;
+
 import java.util.ArrayList;
 import java.util.List;
 
+/** Javadoc  */
 
 public class ExamList {
 
     // constructs an empty list of Exams
+    /** Javadoc  */
+    private final List<Exam> examList;
 
-    private List<Exam> examList;
-
+    /** Javadoc  */
     public ExamList() {
         this.examList = new ArrayList<>();
     }
 
+    /** Javadoc
+     * @return r
+     * */
     public List<Exam> all() {
         return new ArrayList<>(examList);
     }
 
+    /** Javadoc
+     * @param exam e
+     * */
     public void add(Exam exam) {
         this.examList.add(exam);
     }
 
+    /** Javadoc
+     * @param title t
+     * @return r
+     * */
     public Exam bySubjectTitle(String title) {
         for (Exam exam : this.examList) {
-            if (exam.getSubject().getTitle().equals(title)) {
+            if (exam.getSubject().title().equals(title)) {
                 return  exam;
             }
 
@@ -31,24 +44,17 @@ public class ExamList {
         throw new java.lang.IllegalStateException();
     }
 
-//    public void removeExam(Exam exam) {
-//        for (int i =0; i<this.examList.size(); i++) {
-//            if (this.examList.get(i).equals(exam)) {
-//                this.examList.remove(i);
-//                // same exam founded
-//                break;
-//            }
-//        }
-//    }
-
+    /** Javadoc
+     * @param exam e
+     * */
     public void removeExam(Exam exam) {
-        if (this.examList.contains(exam)) {
-            this.examList.remove(exam);
-        }
+        this.examList.remove(exam);
     }
 
 
-
+    /** Javadoc
+     * @return r
+     * */
     public String getFullDetail() {
         StringBuilder sb = new StringBuilder();
         for (Exam exam : this.examList) {
@@ -60,10 +66,10 @@ public class ExamList {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-
-
+        int index = 1;
         for (Exam exam : examList) {
-            sb.append(exam.getFullDetail());
+            sb.append(index).append(". ").append(exam.getFullDetail()).append("\n");
+            index++;
         }
 
         return sb.toString();

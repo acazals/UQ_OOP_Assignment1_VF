@@ -1,18 +1,19 @@
 package examblock.model;
 
-import java.util.Locale;
+/**
+ * Javadoc
+ *
+ * @param title       Javadoc
+ * @param description Javadoc
+ */
+public record Subject(String title, String description) {
 
-public class Subject {
-
-    private String title;
-    private String description;
-    private ExamList exams;
-    // stroing the different exams for one subjetc in it s instance subject
-
-    // what should i do if the title / descirption is not respecting the rules ?
+    /**
+     * Javadoc
+     */
 
     private String cleanAndValidateTitle(String title) {
-        // Trim leading/trailing spaces + replace multiple spaces with a single space
+
         title = title.trim().replaceAll("\\s+", " ");
 
         // if title ends with a full stop
@@ -20,7 +21,7 @@ public class Subject {
             throw new IllegalArgumentException("Title must not end with a full stop.");
         }
 
-        // Check if title is in the correct format: each word capitalized
+
         if (!title.matches("([A-Z][a-z]*|[0-9]+|[IVXLCDM]+)( [A-Z][a-z]*|[0-9]+|[IVXLCDM]+)*")) {
             throw new IllegalArgumentException("Invalid title format.");
         }
@@ -29,39 +30,58 @@ public class Subject {
     }
 
     private String validateDescription(String description) {
-        // Check if description starts with a capital letter and ends with a full stop
         if (!description.matches("[A-Z].*\\.")) {
             // .* means followed by any characters
-            throw new IllegalArgumentException("Description must start with a capital letter and end with a full stop.");
+            throw new IllegalArgumentException("must start with a capital letter "
+                    +
+                    "+ end with a full stop.");
         }
 
         return description;
     }
-    public Subject(String title, String description) {
-        this.title = title;
-        this.description = description;
-        this.exams = new ExamList();
+
+    /**
+     * Javadoc
+     */
+    public Subject {
     }
 
-    public String getDescription() {
-        return  this.description;
+    /**
+     * Javadoc
+     */
+    @Override
+    public String description() {
+        return this.description;
     }
 
+    /**
+     * Javadoc
+     */
     public String getFullDetail() {
         return this.title.toUpperCase() + "\n" + "\"" + this.description + "\"";
     }
 
-    public String getTitle() {
+    /**
+     * Javadoc
+     */
+    @Override
+    public String title() {
         return this.title;
     }
 
+    /**
+     * Javadoc
+     */
+    private static String  capitalizeFirstLetter(String word) {
+        if (word == null || word.isEmpty()) {
+            return word;
+        }
+        return word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
+    }
 
-
-
-    
 
     @Override
     public String toString() {
-        return this.title.toUpperCase(); // subject title as a String in all uppercase and a newline.
+        return this.title.toUpperCase(); // title as a String in all uppercase and a newline.
     }
 }

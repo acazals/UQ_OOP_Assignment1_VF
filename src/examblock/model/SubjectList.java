@@ -3,47 +3,65 @@ package examblock.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Javadoc  */
 public class SubjectList {
 
-    private ArrayList<Subject> subjects;
+    /** Javadoc  */
+    private final ArrayList<Subject> subjects;
 
+    /** Javadoc  */
     public SubjectList() {
         this.subjects = new ArrayList<>();
     }
 
-    public void addSubject( Subject subject) {
+    /** Javadoc
+     * @param subject s
+     * */
+    public void addSubject(Subject subject) {
         this.subjects.add(subject);
     }
 
+    /** Javadoc
+     * @param subject s
+     * */
     public void removeSubject(Subject subject) {
-        if (this.subjects.contains(subject)) {
-            this.subjects.remove(subject);
-        }
+        this.subjects.remove(subject);
     }
 
+    /** Javadoc
+     * @return r
+     * */
     public List<Subject> all() {
         return new ArrayList<>(subjects); // reference in java
     }
 
+    /** Javadoc
+     *
+     * @param title t
+     * @return r
+     * */
     public Subject byTitle(String title) {
         // get the first Subject with a matching title
         for (Subject subject : this.subjects) {
-            if (subject.getTitle().equals(title)) {
+            if (subject.title().equals(title)) {
                 return subject;
             }
         }
         throw new java.lang.IllegalStateException();
     }
 
+    /** Javadoc
+     * @return r
+     * */
     public String getFullDetail() {
         if (this.subjects.isEmpty()) {
             return null;
         } else {
-            String total = "";
-            for (int i=0; i<this.subjects.size(); i++) {
-                total = total + subjects.get(i).getFullDetail() + "\n"; // skip a line
+            StringBuilder total = new StringBuilder();
+            for (Subject subject : this.subjects) {
+                total.append(subject.getFullDetail()).append("\n"); // skip a line
             }
-            return total;
+            return total.toString();
         }
     }
 
@@ -52,9 +70,9 @@ public class SubjectList {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        int i =1;
-        for ( Subject subject : subjects) {
-            String str = i + ". " + subject.getTitle() + "\n";
+        int i = 1;
+        for (Subject subject : subjects) {
+            String str = i + ". " + subject.title() + "\n";
             sb.append(str);
             i++;
         }

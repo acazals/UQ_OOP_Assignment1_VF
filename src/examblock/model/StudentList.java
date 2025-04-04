@@ -2,30 +2,41 @@ package examblock.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+/** Javadoc  */
 public class StudentList {
 
-    private ArrayList<Student> students;
+    /** Javadoc  */
+    private final ArrayList<Student> students;
 
+    /** Javadoc  */
     public StudentList() {
         this.students = new ArrayList<>();
     }
 
+    /** Javadoc
+     * @param student s
+     * */
     public void add(Student student) {
         this.students.add(student);
     }
 
-
-
-
+    /** Javadoc
+     * @return r
+     * */
     public List<Student> all() {
         return new ArrayList<>(this.students);
     }
 
 
-    public Student byLui( Long lui) {
-        for ( Student student : this.students) {
-            if (student.getLui() == lui)  {
+    /** Javadoc
+     * @param lui l
+     * @return r
+     * */
+    public Student byLui(Long lui) {
+        for (Student student : this.students) {
+            if (Objects.equals(student.getLui(), lui))  {
                 return student;
             }
         }
@@ -33,17 +44,23 @@ public class StudentList {
     }
 
 
-    public int countStudents( Subject subject, boolean aara) {
+    /** Javadoc
+     * @param subject a
+     * @param aara a
+     * @return r
+     *
+     * */
+    public int countStudents(Subject subject, boolean aara) {
         if (this.students.isEmpty()) {
-            throw new IllegalArgumentException( " this is an empty list");
+            throw new IllegalArgumentException(" this is an empty list");
 
         } else {
-            int total =0;
+            int total = 0;
             for (Student student : this.students) {
 
                 // loop through his exams and check if it matches
                 if (student.getSubjects().all().isEmpty()) {
-                    throw new IllegalArgumentException( " student not taking anye xams here");
+                    throw new IllegalArgumentException(" student not taking anye xams here");
                 }
                 for (Subject mysubject  : student.getSubjects().all()) {
 
@@ -58,15 +75,18 @@ public class StudentList {
     }
 
 
+    /** Javadoc
+     * @return r
+     * */
     public String getFullDetail() {
         if (this.students.isEmpty()) {
             return "";
         } else {
-            String total = "";
-            for (int i =0; i<this.students.size(); i++) {
-                total = total + students.get(i).toString() + "\n";
+            StringBuilder total = new StringBuilder();
+            for (Student student : this.students) {
+                total.append(student.toString()).append("\n");
             }
-            return total;
+            return total.toString();
         }
     }
 
@@ -74,18 +94,19 @@ public class StudentList {
 
     @Override
     public String toString() {
-          StringBuilder sb = new StringBuilder();
-          for (Student student : this.students) {
-              String str = student.getLui() + " " + student.givenNames() + " " + student.familyName() + "\n";
-              sb.append(str);
-              int i=1;
-              for (Subject subject : student.getSubjects().all()) {
-                  String str2 = i + ". "+subject.getTitle() + "\n";
-                  sb.append(str2);
-                  i++;
-              }
-              sb.append("================================================================================ \n");
-          }
-          return sb.toString();
+        StringBuilder sb = new StringBuilder();
+        for (Student student : this.students) {
+            String str = student.getLui() + " "
+                    + student.givenNames() + " " + student.familyName() + "\n";
+            sb.append(str);
+            int i = 1;
+            for (Subject subject : student.getSubjects().all()) {
+                String str2 = i + ". " + subject.title() + "\n";
+                sb.append(str2);
+                i++;
+            }
+            sb.append("====================================================================== \n");
+        }
+        return sb.toString();
     }
 }

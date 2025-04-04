@@ -3,43 +3,60 @@ package examblock.model;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
+
+/** Javadoc  */
 
 public class Exam {
 
     // i added an override equals methode AND a check conditions boolean method
-
+    /** Javadoc  */
     public static enum ExamType {
+
+        /** Javadoc  */
         INTERNAL,  // Internal assessment, conducted by the school
+
+        /** Javadoc  */
         EXTERNAL;  // External assessment, conducted by the QCAA
 
         // Optional: Custom method inside the enum for additional functionality
+        /** Javadoc
+         * @return str
+         * */
         public String getDescription() {
-            switch (this) {
-                case INTERNAL:
-                    return "Internal assessment, conducted by the school";
-                case EXTERNAL:
-                    return "External assessment, conducted by the QCAA";
-                default:
-                    return "Unknown";
-            }
+            return switch (this) {
+                case INTERNAL -> "Internal assessment, conducted by the school";
+                case EXTERNAL -> "External assessment, conducted by the QCAA";
+                //default -> "Unknown";
+            };
         }
     }
 
+    /** Javadoc  */
+    private final Subject subject;
+    /** Javadoc  */
+    private final Exam.ExamType examtype;
 
-    private Subject subject;
-    private Exam.ExamType examtype;
-
+    /** Javadoc  */
     private LocalDate date;
-    private LocalTime time;
+    /** Javadoc  */
+    private final LocalTime time;
 
+    /** Javadoc  */
     private Character unit;
+    /** Javadoc  */
     private String subtitle;
+    /** Javadoc  */
     private Character paper;
 
 
-
-    private Boolean CheckConditions(int day, int month, int year, int hour, int minute) {
+    /** Javadoc
+     * @param day d
+     * @param hour h
+     * @param minute m
+     * @param month m
+     * @param year y
+     * */
+    private Boolean checkConditions(int day, int month, int year, int hour, int minute) {
         if (year < 2025) {
             System.out.println("Year must be 2025 or later.");
             return false;
@@ -67,11 +84,23 @@ public class Exam {
         return true;
     }
 
-    public Exam(Subject subject, Exam.ExamType examType, int day, int month, int year, int hour, int minute) {
+    /** Javadoc
+     * @param year y
+     * @param month m
+     * @param minute m
+     * @param hour h
+     * @param day d
+     * @param examType e
+     * @param subject s
+     * */
+    public Exam(Subject subject, Exam.ExamType examType,
+                int day, int month, int year, int hour, int minute) {
 
         // check conditions
-        if (!this.CheckConditions(day, month, year, hour, minute)) {
-            throw new IllegalArgumentException("Something is wrong with the argument, pls check the string printed right before this.");
+        if (!this.checkConditions(day, month, year, hour, minute)) {
+            throw new IllegalArgumentException("Something is wrong with the argument, "
+                    +
+                    "pls check the string printed right before this.");
         } else {
             this.subject = subject;
 
@@ -82,28 +111,53 @@ public class Exam {
         }
     }
 
-    public Exam(Subject subject, Exam.ExamType examType, Character unit, int day, int month, int year, int hour, int minute) {
-        if (!this.CheckConditions(day, month, year, hour, minute)) {
-            throw new IllegalArgumentException("Something is wrong with the argument, pls check the string printed right before this.");
-        } else {
-            this.subject = subject;
-            this.examtype = examType;
+    /** Javadoc
+     * @param year y
+     * @param month m
+     * @param minute m
+     * @param hour h
+     * @param day d
+     * @param examType e
+     * @param subject s
+     * @param unit u
+     *
+     * */
+    public Exam(Subject subject, Exam.ExamType examType, Character unit,
+                int day, int month, int year, int hour, int minute) {
+        if (!this.checkConditions(day, month, year, hour, minute)) {
+            throw new IllegalArgumentException("Something is wrong with the argument, "
+                    +
+                    "pls check the string printed right before this.");
+        }
+        this.subject = subject;
+        this.examtype = examType;
 
+        this.date = LocalDate.of(year, month, day);
+        this.time = LocalTime.of(hour, minute);
 
-            this.date = LocalDate.of(year, month, day);
-            this.time = LocalTime.of(hour, minute);
-
-            this.unit = unit;
-
-             }
-        // paper number and subtitle but no unit specified
+        this.unit = unit;
     }
 
 
-
-    public Exam(Subject subject, Exam.ExamType examType, Character paper, String subtitle, int day, int month, int year, int hour, int minute) {
-        if (!this.CheckConditions(day, month, year, hour, minute)) {
-            throw new IllegalArgumentException("Something is wrong with the argument, pls check the string printed right before this.");
+    /** Javadoc
+     * @param year y
+     * @param month m
+     * @param minute m
+     * @param hour h
+     * @param day d
+     * @param examType e
+     * @param subject s
+     * @param paper u
+     * @param subtitle s
+     *
+     *
+     * */
+    public Exam(Subject subject, Exam.ExamType examType, Character paper, String subtitle,
+                int day, int month, int year, int hour, int minute) {
+        if (!this.checkConditions(day, month, year, hour, minute)) {
+            throw new IllegalArgumentException("Something is wrong with the argument,"
+                    +
+                    " pls check the string printed right before this.");
         } else {
             this.subject = subject;
             this.examtype = examType;
@@ -119,9 +173,25 @@ public class Exam {
         // paper number and subtitle but no unit specified
     }
 
-    public Exam(Subject subject, Exam.ExamType examType, Character paper, String subtitle, Character unit, int day, int month, int year, int hour, int minute) {
-        if (!this.CheckConditions(day, month, year, hour, minute)) {
-            throw new IllegalArgumentException("Something is wrong with the argument, pls check the string printed right before this.");
+    /** Javadoc
+     * @param year y
+     * @param month m
+     * @param minute m
+     * @param hour h
+     * @param day d
+     * @param examType e
+     * @param subject s
+     * @param paper u
+     * @param subtitle s
+     * @param unit u
+     *
+     * */
+    public Exam(Subject subject, Exam.ExamType examType, Character paper, String subtitle,
+                Character unit, int day, int month, int year, int hour, int minute) {
+        if (!this.checkConditions(day, month, year, hour, minute)) {
+            throw new IllegalArgumentException("Something is wrong with the argument, "
+                    +
+                    "pls check the string printed right before this.");
         } else {
             this.subject = subject;
             this.examtype = examType;
@@ -137,50 +207,81 @@ public class Exam {
         // paper number and subtitle but no unit specified
     }
 
+    /** Javadoc
+     * @return r
+     * */
     public Subject getSubject() {
         return subject;
     }
 
     // Getter for date
+    /** Javadoc
+     * @return r
+     * */
     public LocalDate getDate() {
         return date;
     }
 
     // Getter for time
+    /** Javadoc
+     * @return r
+     * */
     public LocalTime getTime() {
         return time;
     }
 
     //  title
+    /** Javadoc
+     * @return r
+     * */
     public String getTitle() {
         // returns type subject paper subtitle
         if (this.paper != null) {
-            return this.examtype + " - " + subject.getTitle() + " - " + paper.toString() + " - " + subtitle;
+            return this.examtype + " - " + subject.title()
+                    + " - " + paper.toString() + " - " + subtitle;
         } else {
-            return this.examtype + " - " + subject.getTitle() + " - " + subtitle;
+            return this.examtype + " - " + subject.title() + " - " + subtitle;
         }
 
     }
 
-
+    /** Javadoc
+     * @return r
+     * */
     public String getShortTitle() {
         // same as get title ??
         if (this.paper != null) {
-            return this.examtype + " - " + subject.getTitle() + " - " + Character.toString(paper) + this.subtitle;
+            return this.examtype + " - " + subject.title()
+                    + " - " + Character.toString(paper) + this.subtitle;
         } else {
-            return this.examtype + " - " + subject.getTitle() + " - " + this.subtitle;
+            return this.examtype + " - " + subject.title() + " - " + this.subtitle;
         }
 
     }
 
-    // full details
-    public String getFullDetail() {
-        String title = "Year 12 "+  this.examtype+  " Assessment " + this.subject;
 
-        if (this.paper != null) {
-            title += " " + "Paper " + this.paper;
+
+    // full
+    /** Javadoc
+     * @return r
+     * */
+    public String getFullDetail() {
+        if (this.examtype == ExamType.INTERNAL) {
+            String title = "Year 12 Internal Assessment " + this.subject.title();
+
+            if (this.paper != null) {
+                title += " " + "Paper " + this.paper;
+            }
+            return title;
+        } else {
+            String title = "Year 12 External Assessment " + this.subject.title();
+
+            if (this.paper != null) {
+                title += " " + "Paper " + this.paper;
+            }
+            return title;
         }
-        return title;
+
 
     }
 

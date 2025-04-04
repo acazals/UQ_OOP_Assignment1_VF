@@ -4,7 +4,6 @@ import examblock.cli.Cli;
 import examblock.inputs.Catalogue;
 import examblock.model.Exam;
 import examblock.model.ExamList;
-import examblock.model.Session;
 import examblock.model.SessionList;
 import examblock.model.StudentList;
 import examblock.model.Subject;
@@ -24,14 +23,32 @@ import java.util.ArrayList;
  */
 public class ExamBlock {
 
+    /** Javadoc*/
     private final Cli cli; // The command-line interface for manipulating the block.
-    private final Catalogue catalogue; // This catalogue holds all catalogues,cohort,exams,rooms,venues.
+
+    /** Javadoc*/
+    private final Catalogue catalogue;
+    // This catalogue holds all catalogues,cohort,exams,rooms,venues.
+
+    /** Javadoc*/
     private final SubjectList subjectCatalogue; // All possible subjects in this block.
+
+    /** Javadoc*/
     private final UnitList unitCatalogue; // All possible subject units in this block.
+
+    /** Javadoc*/
     private final StudentList cohort; // All the Year 12 students.
+
+    /** Javadoc*/
     private final ExamList exams; // The current set of Year 12 Exams.
+
+    /** Javadoc*/
     private final RoomList rooms; // The current list of available rooms for exam venues.
+
+    /** Javadoc*/
     private final VenueList venues; // The current list of exam venues.
+
+    /** Javadoc*/
     private final SessionList sessions; // The current set of exam sessions allocated to venues.
 
     /**
@@ -56,16 +73,20 @@ public class ExamBlock {
         welcomeMessage();
         String title = getTitleFromUser();
         double version = getVersionFromUser();
-        System.out.println("\nNow generating a new Exam Block \"" + title + "\" (version " +
+        System.out.println("\nNow generating a new Exam Block \"" + title + "\" (version "
+                +
                 version + ") on " + LocalDate.now() + " at " + LocalTime.now() + ":");
         processSchedule();
         finaliseExamBlock(title, version);
     }
 
     private void welcomeMessage() {
-        System.out.println("Welcome to the exam block generator.\n" +
-                "Currently scheduling main exams in V1, V2, and V3 (or combinations) only.\n" +
-                "Currently scheduling AARA exams in W1, W2, or W1+W2.\n" +
+        System.out.println("Welcome to the exam block generator.\n"
+                +
+                "Currently scheduling main exams in V1, V2, and V3 (or combinations) only.\n"
+                +
+                "Currently scheduling AARA exams in W1, W2, or W1+W2.\n"
+                +
                 "There will be a complete new schedule generated.");
         System.out.println("=".repeat(60));
     }
@@ -149,10 +170,11 @@ public class ExamBlock {
     }
 
     private void countStudents(boolean aara) {
-        System.out.println("What subject do you want to count the" + aaraString(aara) + "students for? ");
+        System.out.println("What subject do you want to count the"
+                + aaraString(aara) + "students for? ");
         Subject subject = cli.pickOptionFromCollection(subjectCatalogue.all());
         System.out.println("There are " + cohort.countStudents(subject, aara) + aaraString(aara) +
-                "students who will be taking the " + subject.getTitle() + " exam.");
+                "students who will be taking the " + subject.title() + " exam.");
     }
 
     private void scheduleExam() {
@@ -165,7 +187,7 @@ public class ExamBlock {
         Exam exam = cli.pickOptionFromCollection(exams.all());
         int numberStudents = cohort.countStudents(exam.getSubject(), aara);
         System.out.println("There are " + numberStudents + aaraString(aara) +
-                "students who will be taking the " + exam.getSubject().getTitle() + " exam.");
+                "students who will be taking the " + exam.getSubject().title() + " exam.");
         // Next select a venue.
         Venue venue; // Local variable for the selected venue (will be set from a menu).
         int numberSeats; // the number of available student desks in the venue.
@@ -180,11 +202,12 @@ public class ExamBlock {
                     numberSeats = venue.deskCount();
                 }
             } while (sessionOverflow(numberSeats, totalStudents));
-            // Find or create this session in the session list and work out how many students in total.
+            // Find or create this session in the session list
+            // and work out how many students in total.
             totalStudents = sessions.getSessionNewTotal(venue, exam, numberStudents);
         } while (sessionOverflow(numberSeats, totalStudents));
         // Confirm scheduling
-        System.out.println("CONFIRM scheduling the " + exam.getSubject().getTitle() +
+        System.out.println("CONFIRM scheduling the " + exam.getSubject().title() +
                 aaraString(aara) + "exam into " + venue.venueId());
         String pickedOption;
         ArrayList<String> options = new ArrayList<>();

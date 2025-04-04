@@ -2,20 +2,47 @@ package examblock.model;
 
 import java.util.ArrayList;
 
+/** Javadoc  */
 public class Venue extends Room {
 
-    private int roomCount; // 1 or 2 or 3
-    private RoomList rooms; // at least one room
-    private int rows;
-    private int columns;
-    private int totalDesks; // not necesseraly rows x columns
-    private ArrayList<Desk> desklist; //
-    private boolean aara;
+    /** Javadoc  */
+    private final int roomCount; // 1 or 2 or 3
+
+    /** Javadoc  */
+    private final RoomList rooms; // at least one room
+
+    /** Javadoc  */
+    private final int rows;
+
+    /** Javadoc  */
+    private final int columns;
+
+    /** Javadoc  */
+    private final int totalDesks; // not necesseraly rows x columns
+
+
+    /** Javadoc  */
+    private final boolean aara;
+
+    /** Javadoc  */
     private ArrayList<Session> sessions;
-    private ArrayList<Integer> sessionIDs;
+
+    /** Javadoc  */
+    private ArrayList<Integer> sessionids;
 
 
-    public Venue(String id, int roomCount, RoomList rooms, int rows, int columns, int totalDesks, boolean aara) {
+    /** Javadoc
+     * @param aara a
+     * @param id i
+     * @param columns c
+     * @param rooms r
+     * @param rows r
+     * @param roomCount r
+     * @param totalDesks t
+     *
+     * */
+    public Venue(String id, int roomCount, RoomList rooms, int rows, int columns,
+                 int totalDesks, boolean aara) {
         super(id); // constructor of room
         this.roomCount = roomCount;
         this.rooms = rooms;
@@ -24,45 +51,57 @@ public class Venue extends Room {
         this.totalDesks = totalDesks;
         this.aara = aara;
         this.sessions = new ArrayList<>();
-        this.sessionIDs = new ArrayList<>();
+        this.sessionids = new ArrayList<>();
     }
 
-    int getColumns() {
+    /** Javadoc
+     * @return r
+     * */
+    public int getColumns() {
         return this.columns;
     }
 
-    int getRows() {
+    /** Javadoc
+     * @return r
+     * */
+    public int getRows() {
         return this.rows;
     }
 
 
 
-    public ArrayList<Integer> getSessionIDs() {
-        return this.sessionIDs;
+    /** Javadoc
+     * @return r
+     * */
+    public ArrayList<Integer> getsessionids() {
+        return this.sessionids;
     }
 
 
+    /** Javadoc
+     * @param newSession n
+     * */
     // add session : adds a session to where we store the past sessions and IDs
     public void addSession(Session newSession) {
-        if (this.sessionIDs.contains(newSession.getSessionNumber())) {
-            Boolean temp = true;
+        if (this.sessionids.contains(newSession.getSessionNumber())) {
+
             int i = 1;
-            while (temp) {
-                if (this.sessionIDs.contains(i) ){
+            while (true) {
+                if (this.sessionids.contains(i)) {
                     i++;
                 } else {
                     newSession.setSessionNumber(i);
 
                     this.sessions.add(newSession);
-                    this.sessionIDs.add(i);
+                    this.sessionids.add(i);
 
-                    temp = false;
+
                     break;
                 }
             }
         } else {
             sessions.add(newSession);
-            sessionIDs.add(newSession.getSessionNumber());
+            sessionids.add(newSession.getSessionNumber());
         }
     }
 
@@ -76,35 +115,43 @@ public class Venue extends Room {
     }
 
 
+    /** Javadoc
+     * @param aara a
+     * @return r
+     * */
     public boolean checkVenueType(boolean aara) {
-        if (this.aara == aara) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.aara == aara;
     }
 
+    /** Javadoc
+     * @return r
+     * */
     public boolean isAara() {
         return this.aara;
     }
 
-
-
+    /** Javadoc
+     * @return r
+     * */
     public int deskCount() {
         return this.totalDesks;
     }
 
+    /** Javadoc
+     * @return r
+     * */
     public String venueId() {
         return this.id;
     }
 
-    public boolean willFit(int numberStudents){
-        if (this.deskCount() < numberStudents) {
-            // we cant fit all those students
-            return false;
-        } else {
-            return true;
-        }
+    /** Javadoc
+     *
+     * @param numberStudents n
+     * @return r
+     * */
+    public boolean willFit(int numberStudents) {
+        // we cant fit all those students
+        return this.deskCount() >= numberStudents;
     }
 
 

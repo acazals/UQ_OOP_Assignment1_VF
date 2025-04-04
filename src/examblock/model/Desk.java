@@ -1,73 +1,67 @@
 package examblock.model;
 
+/**
+ *  Javadoc  */
 public class Desk {
-    private String FamilyName;
-    private String GivenName;
-    private int Number;
-    // could add an exam maybe ??
-    // since for each different venue we "create" the new desk instances
+    /** Javadoc  */
+    private String familyName;
+    /** Javadoc  */
+    private String givenName;
+    /** Javadoc  */
+    private final int number;
+    /*
+    * Javadoc  */
 
-    public Desk(int deskNumber){
-        this.GivenName = null;
-        this.FamilyName = null;
-        this.Number = deskNumber;
+
+    /** Javadoc
+     * @param deskNumber  d
+     * */
+    public Desk(int deskNumber) {
+        this.givenName = null;
+        this.familyName = null;
+        this.number = deskNumber;
     }
 
-//    public Desk(int deskNumber, String familyName, String givenName){
-//        this.GivenName =givenName ;
-//        this.FamilyName = familyName;
-//        this.Number = deskNumber;
-//    }
-
-    public void setFamilyName(String FamilyName) {
-        this.FamilyName = FamilyName;
+    /**
+     * test
+     * @param familyName  f
+     * Javadoc  */
+    public void setFamilyName(String familyName) {
+        this.familyName = familyName;
     }
 
+    /**
+     *
+     * Javadoc
+     * @param givenAndInit g*/
     public void setGivenAndInit(String givenAndInit) {
-        this.GivenName = givenAndInit;
+        this.givenName = givenAndInit;
     }
 
-
+    /** Javadoc
+     * @return str
+     * */
     public String deskFamilyName() {
-        return this.FamilyName;
+        return this.familyName;
     }
 
-    public String deskGivenAndInit(){
-
-
-        return this.GivenName;
+    /** Javadoc
+     * @return str
+     * */
+    public String deskGivenAndInit() {
+        return this.givenName;
     }
 
+    /** Javadoc
+     * @return i
+     * */
     public int deskNumber() {
-        return this.Number;
+        return this.number;
     }
 
-//    @Override
-//    public String toString() {
-//
-//        if ( this.FamilyName != null && this.GivenName != null) {
-//            return "Desk{" +
-//                    "FamilyName='" + FamilyName + '\'' +
-//                    ", GivenName='" + GivenName + '\'' +
-//                    ", Number=" + Number +
-//                    '}';
-//        } else {
-//            return "Desk{" +
-//                    ", Number=" + Number +
-//                    '}';
-//        }
-//
-//    }
-
+    /** Javadoc  */
     @Override
     public String toString() {
-//        if (this.FamilyName.equals("Empty")) {
-//            return " ";
-//        }
-//        return String.format("%s%n%s", this.FamilyName, this.GivenName);
-
-        StringBuilder sb = new StringBuilder();
-        sb.append(" Desk : " + this.Number).append("\n" + this.FamilyName).append("\n" + this.GivenName);
-        return  sb.toString();
+        return " Desk : " + this.number + "\n" + this.familyName + "\n" + this.givenName;
     }
 }
