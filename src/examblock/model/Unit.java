@@ -19,7 +19,7 @@ public class Unit {
 
     /**
     private void validateParameters
-     (Subject subject, Character unitId, String getTitle, String description) {
+     (Subject subject, Character unitId, String getTitle, String getDescription) {
         if (subject == null) {
             throw new IllegalArgumentException(" cannot be null.");
         }
@@ -33,7 +33,7 @@ public class Unit {
      ( [A-Z][a-z]*|[0-9]+|I{1,3}|IV|V?I{0,3})*")) {
             throw new IllegalArgumentException(" contains invalid characters ");
         }
-        if (description == null || !description.matches("^[A-Z].*\\.$")) {
+        if (getDescription == null || !getDescription.matches("^[A-Z].*\\.$")) {
             throw new IllegalArgumentException("Description must start with
      a capital letter + end with a full stop.");
         }
@@ -55,7 +55,7 @@ public class Unit {
      *
      * */
     public Unit(Subject subject, Character unitId, String title, String description) {
-        //validateParameters(subject, unitId, getTitle, description);
+        //validateParameters(subject, unitId, getTitle, getDescription);
         // if one parameter wrong, error thrown
         this.subject = subject;
         this.unitId = unitId;
@@ -99,7 +99,7 @@ public class Unit {
                 +
                 ", getTitle='" + title + '\''
                 +
-                ", description='" + description + '\''
+                ", getDescription='" + description + '\''
                 +
                 '}';
     }

@@ -4,9 +4,9 @@ package examblock.model;
  * Javadoc
  *
  * @param getTitle       Javadoc
- * @param description Javadoc
+ * @param getDescription Javadoc
  */
-public record Subject(String getTitle, String description) {
+public record Subject(String getTitle, String getDescription) {
 
     /**
      * Javadoc
@@ -48,16 +48,15 @@ public record Subject(String getTitle, String description) {
     /**
      * Javadoc
      */
-    @Override
-    public String description() {
-        return this.description;
+    public String getDescription() {
+        return this.getDescription;
     }
 
     /**
      * Javadoc
      */
     public String getFullDetail() {
-        return this.getTitle.toUpperCase() + "\n" + "\"" + this.description + "\"";
+        return this.getTitle.toUpperCase() + "\n" + "\"" + this.getDescription + "\"";
     }
 
     /**
